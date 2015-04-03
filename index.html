@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Video player</title>
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-	</head>
-	<body>
-		<video id="player" autoplay>
-			<source src="video/tester.mp4"></source>
-		</video>
-	</body>
-	<script src="js/main.js"></script>
+<head>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="videoBox">
+  <video id="video1" class="video" width="550" height="300">
+    <source src="video/test.mp4">
+  </video>
+  <div class="controlBox">
+    <button id="playPauseToggle">Pause</button>
+    <input id="timeLine" type="range" min="0" max="100" value="0" step="1">
+  </div>
+</div>
+
+
+<script src="js/Video.js"></script>
+<script src="js/main.js"></script>
+</body>
 </html>
