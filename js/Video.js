@@ -3,6 +3,7 @@ var Video = function(video, playButton, timeLine, muteButton){
 	this.playButton = document.getElementById("playPauseToggle");
 	this.timeLine = document.getElementById("timeLine");
 	this.muteButton = document.getElementById('mute');
+	this.fullScreen = document.getElementById('fullscreen');
 }
 
 Video.prototype.playPause = function()
@@ -18,10 +19,10 @@ Video.prototype.playPause = function()
 	
 }
 
-Video.prototype.vidSeek = function()
+Video.prototype.vidSeek = function(seekto)
 {
-	var seekto = this.video.duration * (this.timeLine.value / 100);
-	this.video.currentTime = seekto;
+	this.seekto = this.video.duration * (this.timeLine.value / 100);
+	this.video.currentTime = this.seekto;
 }
 
 Video.prototype.timeUpdate = function()
@@ -38,7 +39,17 @@ Video.prototype.mute = function ()
 		this.video.muted = true;
 		this.muteButton.innerHTML = "Unmute";
 	}
+}
 
+Video.prototype.fullScreenMode = function()
+{
+	if(this.video.requestFullScreen) {
+		this.video.requestFullScreen();
+	} else if (this.video.webkitRequestFullScreen) {
+		this.video.webkitRequestFullScreen();
+	} else if (this.video.mozRequestFullScreen) {
+		this.video.mozRequestFullScreen();
+	}
 }
 
 
