@@ -7,12 +7,19 @@
 <div class="videoBox">
   <video id="video1" class="video" width="550" height="300">
     <source src="video/test.mp4">
+    
+  </video>
+  <video id="video2" class="video" width="550" height="300">
+    <source src="video/test.mp4">
+    
   </video>
   <div class="controlBox">
     <button id="playPauseToggle">Pause</button>
     <input id="timeLine" type="range" min="0" max="100" value="0" step="1">
-    <button id="mute">Mute</button>
+    <button id="mute">&#128266;</button>
     <button id="fullscreen">Fullscreen</button>
+    <span id="currentTime"></span> |
+    <span id="durationTime"></span>
   </div>
 </div>
 
