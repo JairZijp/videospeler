@@ -5,22 +5,25 @@
 </head>
 <body>
 <div class="videoBox">
-  <video id="video1" class="video" width="550" height="300">
-    <source src="video/test.mp4">
+    <video id="video1" autoplay class="video" width="550" height="300">
+        <source src="video/video1.mp4">
     
-  </video>
-  <video id="video2" class="video" width="550" height="300">
-    <source src="video/test.mp4">
-    
-  </video>
-  <div class="controlBox">
-    <button id="playPauseToggle">Pause</button>
-    <input id="timeLine" type="range" min="0" max="100" value="0" step="1">
-    <button id="mute">&#128266;</button>
-    <button id="fullscreen">Fullscreen</button>
-    <span id="currentTime"></span> |
-    <span id="durationTime"></span>
-  </div>
+    </video>
+
+    <div class="controlBox">
+        <button id="playPauseToggle">Pause</button>
+        <input id="timeLine" type="range" min="0" max="100" value="0" step="1">
+        <button id="mute">&#128266;</button>
+        <button id="fullscreen">Fullscreen</button>
+        <span id="currentTime"></span> |
+        <span id="durationTime"></span>
+    </div>
+    <select id="videoList" size="3">
+        <option value="1">Filmpje 1</option>
+        <option value="2">Filmpje 2</option>
+        <option value="3">Filmpje 3</option>
+  
+    </select>
 </div>
 
 

@@ -1,16 +1,16 @@
 var Video = function(){
-	this.video = document.getElementsByTagName('video')[1];
+	this.video = document.getElementsByTagName('video')[0];
 	this.playButton = document.getElementById("playPauseToggle");
 	this.timeLine = document.getElementById("timeLine");
 	this.muteButton = document.getElementById('mute');
 	this.fullScreen = document.getElementById('fullscreen');
 	this.currentTime = document.getElementById('currentTime');
 	this.durationTime = document.getElementById('durationTime');
+	this.videoList = document.getElementById("videoList");
 }
 
 Video.prototype.playPause = function()
 {
-	
 	if(this.video.paused){
 		this.video.play();
 		this.playButton.innerHTML = "Pause";
@@ -18,7 +18,6 @@ Video.prototype.playPause = function()
 		this.video.pause();
 		this.playButton.innerHTML = "Play";
 	}
-	
 }
 
 Video.prototype.dragTime = function(time)
@@ -52,7 +51,7 @@ Video.prototype.mute = function ()
 		this.muteButton.innerHTML = "&#128266;";
 	} else {
 		this.video.muted = true;
-		this.muteButton.innerHTML = "Unmute	";
+		this.muteButton.innerHTML = "Unmute";
 	}
 }
 
@@ -65,6 +64,14 @@ Video.prototype.fullScreenMode = function()
 	} else if (this.video.mozRequestFullScreen) {
 		this.video.mozRequestFullScreen();
 	}
+}
+
+Video.prototype.changeVideo = function()
+{
+	this.video.src = 'video/video'+event.target.value+'.mp4';
+	this.video.play();
+	this.playButton.innerHTML = "Pause";
+	
 }
 
 
