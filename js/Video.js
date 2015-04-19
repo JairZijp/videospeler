@@ -13,10 +13,10 @@ Video.prototype.playPause = function()
 {
 	if(this.video.paused){
 		this.video.play();
-		this.playButton.innerHTML = "Pause";
+		this.playButton.innerHTML = '<span class="glyphicon glyphicon-pause" aria-hidden="true"></span>';
 	} else {
 		this.video.pause();
-		this.playButton.innerHTML = "Play";
+		this.playButton.innerHTML = '<span class="glyphicon glyphicon-play" aria-hidden="true"></span>';
 	}
 }
 
@@ -48,10 +48,10 @@ Video.prototype.mute = function ()
 {
 	if(this.video.muted){
 		this.video.muted = false;
-		this.muteButton.innerHTML = "&#128266;";
+		this.muteButton.innerHTML = '<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>';
 	} else {
 		this.video.muted = true;
-		this.muteButton.innerHTML = "Unmute";
+		this.muteButton.innerHTML = '<span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span>';
 	}
 }
 
@@ -70,7 +70,7 @@ Video.prototype.changeVideo = function()
 {
 	this.video.src = 'video/video'+event.target.value+'.mp4';
 	this.video.play();
-	this.playButton.innerHTML = "Pause";
+	this.playButton.innerHTML = "<span class='glyphicon glyphicon-pause' aria-hidden='true'>";
 	
 }
 

@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 </head>
 <body>
+
 <div class="videoBox">
     <video id="video1" autoplay class="video" width="550" height="300">
         <source src="video/video1.mp4">
@@ -11,10 +13,10 @@
     </video>
 
     <div class="controlBox">
-        <button id="playPauseToggle">Pause</button>
+        <button id="playPauseToggle"><span class="glyphicon glyphicon-pause" aria-hidden="true"></span></button>
         <input id="timeLine" type="range" min="0" max="100" value="0" step="1">
-        <button id="mute">&#128266;</button>
-        <button id="fullscreen">Fullscreen</button>
+        <button id="mute"><span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span></button>
+        <button id="fullscreen"><span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></button>
         <span id="currentTime"></span> |
         <span id="durationTime"></span>
     </div>
@@ -25,7 +27,6 @@
   
     </select>
 </div>
-
 
 <script src="js/Video.js"></script>
 <script src="js/main.js"></script>
