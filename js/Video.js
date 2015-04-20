@@ -7,6 +7,11 @@ var Video = function(){
 	this.currentTime = document.getElementById('currentTime');
 	this.durationTime = document.getElementById('durationTime');
 	this.videoList = document.getElementById("videoList");
+	this.restartButton = document.getElementById("restartButton");
+	this.scroller = document.getElementById("scroller");
+
+
+
 }
 
 Video.prototype.playPause = function()
@@ -41,7 +46,6 @@ Video.prototype.timeUpdate = function(currentMinutes, currentSeconds, durationMi
 	}
 	this.currentTime.innerHTML = currentMinutes + ":" + currentSeconds;
 	this.durationTime.innerHTML = durationMinutes + ":" + durationSeconds;
-	
 }
 
 Video.prototype.mute = function () 
@@ -71,7 +75,27 @@ Video.prototype.changeVideo = function()
 	this.video.src = 'video/video'+event.target.value+'.mp4';
 	this.video.play();
 	this.playButton.innerHTML = "<span class='glyphicon glyphicon-pause' aria-hidden='true'>";
-	
 }
 
+Video.prototype.restart = function() 
+{
+	this.video.currentTime = 0;
+}
 
+Video.prototype.scrollings = function(event) 
+{
+	
+	document.onmousemove;
+	this.scroller.style.left = event.clientX;			
+}
+
+var video1 = new Video();
+
+video1.playButton.addEventListener('click',function(){ video1.playPause()		});
+//video1.video.addEventListener("timeupdate",function(){ video1.timeUpdate()		});
+//video1.timeLine.addEventListener("change", function(){ video1.dragTime()   		});
+video1.muteButton.addEventListener("click",function(){ video1.mute()	   		});
+video1.fullScreen.addEventListener("click",function(){ video1.fullScreenMode() 	});
+video1.videoList.addEventListener("change",function(){ video1.changeVideo()		});
+video1.restartButton.addEventListener("click",function(){ video1.restart()      });
+video1.scroller.addEventListener("click", function() { video1.scrollings()		});
