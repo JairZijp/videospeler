@@ -9,7 +9,8 @@ var Video = function(){
 	this.videoList = document.getElementById("videoList");
 	this.restartButton = document.getElementById("restartButton");
 	this.scroller = document.getElementById("scroller");
-
+	this.ypos = document.getElementById("ypos");
+	this.xpos = document.getElementById("xpos")
 
 
 }
@@ -25,15 +26,15 @@ Video.prototype.playPause = function()
 	}
 }
 
-Video.prototype.dragTime = function(time)
+Video.prototype.dragTime = function()
 {
-	time = this.video.duration * (this.timeLine.value / 100);
-	this.video.currentTime = time;
+	
 }
 
 Video.prototype.timeUpdate = function(currentMinutes, currentSeconds, durationMinutes, durationSeconds)
 {
-	this.timeLine.value = this.video.currentTime * (100 / this.video.duration);
+	//this.timeLine.value = this.video.currentTime * (100 / this.video.duration);
+	this.scroller.style.marginLeft = this.video.currentTime * (100 / this.video.duration - 0.4) + '%';
 	currentMinutes = Math.floor(this.video.currentTime / 60);
 	currentSeconds = Math.floor(this.video.currentTime - currentMinutes * 60);
 	durationMinutes = Math.floor(this.video.duration / 60);
@@ -82,17 +83,19 @@ Video.prototype.restart = function()
 	this.video.currentTime = 0;
 }
 
-Video.prototype.scrollings = function(event) 
+Video.prototype.scrollings = function(e) 
 {
-	
-	document.onmousemove;
-	this.scroller.style.left = event.clientX;			
+	/*time = this.video.duration * (this.scrollings.value / 100);
+	this.video.currentTime = time; */
+
+	this.xpos.innerHTML = e.clientX;
+	this.ypos.innerHTML = e.clientY;
 }
 
 var video1 = new Video();
 
 video1.playButton.addEventListener('click',function(){ video1.playPause()		});
-//video1.video.addEventListener("timeupdate",function(){ video1.timeUpdate()		});
+video1.video.addEventListener("timeupdate",function(){ video1.timeUpdate()		});
 //video1.timeLine.addEventListener("change", function(){ video1.dragTime()   		});
 video1.muteButton.addEventListener("click",function(){ video1.mute()	   		});
 video1.fullScreen.addEventListener("click",function(){ video1.fullScreenMode() 	});

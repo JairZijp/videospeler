@@ -18,12 +18,15 @@ button {
 #scroll-container {
 	height: 20px;
 	width: 100%;
+	overflow: hidden;
 	background-color: #ccc;
 }
 
 #scroller { 
 	height: 20px;
+	
 	width: 20px;
 	border-radius: 50%;
 	background-color: blue;
+	
 }
