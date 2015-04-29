@@ -1,5 +1,4 @@
-var Video = function()
-{
+var Video = function(){
     this.video = document.getElementsByTagName('video')[0];
     this.playButton = document.getElementById("playPauseToggle");
     this.timeLine = document.getElementById("timeLine");
@@ -14,11 +13,12 @@ var Video = function()
     this.xpos = document.getElementById("xpos");
     
     this.videoSource = this.video.getElementsByTagName('source')[0];
-    this.video_links = document.getElementsByTagName("section")[0];
+    this.video_links = document.getElementsByTagName("figcaption")[0];
     this.link_list =[];
     this.currentVid = 0;
     this.allLnks = this.video_links.children;
-   
+    this.lnkNum = this.allLnks.length;
+
 }
 
 Video.prototype.playVideo = function(index){
@@ -49,6 +49,7 @@ Video.prototype.dragTime = function()
 
 Video.prototype.timeUpdate = function(currentMinutes, currentSeconds, durationMinutes, durationSeconds)
 {
+    //this.timeLine.value = this.video.currentTime * (100 / this.video.duration);
     this.scroller.style.marginLeft = this.video.currentTime * (100 / this.video.duration - 0.4) + '%';
     currentMinutes = Math.floor(this.video.currentTime / 60);
     currentSeconds = Math.floor(this.video.currentTime - currentMinutes * 60);
@@ -86,6 +87,13 @@ Video.prototype.fullScreenMode = function()
     }
 }
 
+Video.prototype.changeVideo = function()
+{
+    this.video.src = 'video/video'+event.target.value+'.mp4';
+    this.video.play();
+    this.playButton.innerHTML = "<span class='glyphicon glyphicon-pause' aria-hidden='true'>";
+}
+
 Video.prototype.restart = function() 
 {
     this.video.currentTime = 0;
@@ -93,19 +101,17 @@ Video.prototype.restart = function()
 
 Video.prototype.scrollings = function(e) 
 {
-	var lala = e.clientX;
-    this.xpos.innerHTML = lala;
-   
+    this.xpos.innerHTML = e.clientX;
+    this.ypos.innerHTML = e.clientY;
 }
 
-Video.prototype.changeVideo = function(e, index)
-{
-    e.preventDefault();  
-    for (var i=0; i<this.lnkNum; i++) {
-        this.allLnks[i].classList.remove("currentvid");
-    }
-    this.playVideo(index);
-}    
+Video.prototype.changeVideo = function(e, index){
+        e.preventDefault();  
+        for (var i=0; i<this.lnkNum; i++) {
+            this.allLnks[i].classList.remove("currentvid");
+        }
+        this.playVideo(index);
+        }    
 
 
 var video1 = new Video();
@@ -115,22 +121,38 @@ video1.video.addEventListener("timeupdate",function(){ video1.timeUpdate()      
 video1.muteButton.addEventListener("click",function(){ video1.mute()            });
 video1.fullScreen.addEventListener("click",function(){ video1.fullScreenMode()  });
 video1.restartButton.addEventListener("click",function(){ video1.restart()      });
-video1.scroller.addEventListener("click", function(e) { video1.scrollings(e)      });
+video1.scroller.addEventListener("click", function() { video1.scrollings()      });
 
-for (var i=0; i<video1.allLnks.length; i++) {
+for (var i=0; i<video1.lnkNum; i++) {
     
     var filename = video1.allLnks[i].href;
     video1.link_list[i] = filename.slice(0);
 
         (function(index){
-        video1.allLnks[i].addEventListener("click", function(e){
+        video1.allLnks[i].addEventListener("click", function(i){
             
-            e.preventDefault();  
-            for (var i=0; i<video1.allLnks.length; i++) {
+            i.preventDefault();  
+            for (var i=0; i<video1.lnkNum; i++) {
                 video1.allLnks[i].classList.remove("currentvid");
             }
             video1.playVideo(index);
            
-        });    
+            });    
     })(i);
 }
+
+
+/*for (var i=0; i<video1.lnkNum; i++) {
+var filename = video1.allLnks[i].href;
+video1.link_list[i] = filename.slice(0);
+
+(function(index){
+        video1.allLnks[i].onclick = function(i){
+        i.preventDefault();  
+        for (var i=0; i<video1.lnkNum; i++) {
+            video1.allLnks[i].classList.remove("currentvid");
+        }
+        video1.playVideo(index);
+        }    
+    })(i);
+}*/

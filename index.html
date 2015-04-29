@@ -7,8 +7,8 @@
 <body>
 
 <div class="videoBox">
-    <video id="video1" autoplay class="video" width="550" height="300">
-        <source src="video/video1.mp4">
+    <video id="video1" muted class="video" width="550" height="300">
+        <source src="video/1.mp4">
     
     </video>
 
@@ -26,12 +26,29 @@
         <span id="currentTime"></span> |
         <span id="durationTime"></span>
     </div>
+    <!--
     <select id="videoList" size="3">
         <option value="1">Filmpje 1</option>
         <option value="2">Filmpje 2</option>
         <option value="3">Filmpje 3</option>
   
     </select>
+    -->
+    <section>
+        
+            <a href="video/1" class="currentvid">
+                Video 1
+            </a>
+            <a href="video/2">
+               Video 2
+            </a>
+            <a href="video/3">
+                Video 3
+            </a>
+        
+
+    </section>
+
     <span id="xpos"></span>
     <span id="ypos"></span>
 </div>

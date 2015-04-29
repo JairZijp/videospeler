@@ -30,3 +30,24 @@ button {
 	background-color: blue;
 	
 }
+.box {
+	height: 50px;
+	width: 50px;
+	display: inline-block;
+}
+
+.playlist {
+	width: 200px;
+	overflow: hidden;
+}
+.playlist img {
+	width: 100%;
+	float: left;
+	padding: 5px;
+}
+.currentvid {
+	border: 5px solid red;
+}
+figcaption img {
+	width: 200px;
+}
