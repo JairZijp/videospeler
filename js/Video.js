@@ -7,25 +7,23 @@ var Video = function()
     this.fullScreen = document.getElementById('fullscreen');
     this.currentTime = document.getElementById('currentTime');
     this.durationTime = document.getElementById('durationTime');
-    this.videoList = document.getElementById("videoList");
     this.restartButton = document.getElementById("restartButton");
     this.scroller = document.getElementById("scroller");
-    this.ypos = document.getElementById("ypos");
+   
     this.xpos = document.getElementById("xpos");
     
     this.videoSource = this.video.getElementsByTagName('source')[0];
-    this.video_links = document.getElementsByTagName("section")[0];
-    this.link_list =[];
-    this.currentVid = 0;
-    this.allLnks = this.video_links.children;
+    this.videoLinks = document.getElementsByTagName("section")[0];
+    this.linksList =[];
+    this.currentVideo = 0;
+    this.allLinks = this.videoLinks.children;
    
 }
 
 Video.prototype.playVideo = function(index){
-    this.video_links.children[index].classList.add("currentvid");
-  
-    this.videoSource.src = this.link_list[index] + ".mp4";
-    this.currentVid = index;
+    this.videoLinks.children[index].classList.add("currentVideo");
+    this.videoSource.src = this.linksList[index] + ".mp4";
+    this.currentVideo = index;
     this.video.load();
     this.video.play();
 
@@ -98,16 +96,6 @@ Video.prototype.scrollings = function(e)
    
 }
 
-Video.prototype.changeVideo = function(e, index)
-{
-    e.preventDefault();  
-    for (var i=0; i<this.lnkNum; i++) {
-        this.allLnks[i].classList.remove("currentvid");
-    }
-    this.playVideo(index);
-}    
-
-
 var video1 = new Video();
 
 video1.playButton.addEventListener('click',function(){ video1.playPause()       });
@@ -115,22 +103,18 @@ video1.video.addEventListener("timeupdate",function(){ video1.timeUpdate()      
 video1.muteButton.addEventListener("click",function(){ video1.mute()            });
 video1.fullScreen.addEventListener("click",function(){ video1.fullScreenMode()  });
 video1.restartButton.addEventListener("click",function(){ video1.restart()      });
-video1.scroller.addEventListener("click", function(e) { video1.scrollings(e)      });
+video1.scroller.addEventListener("click", function(e) { video1.scrollings(e)     });
 
-for (var i=0; i<video1.allLnks.length; i++) {
+for (var i=0; i<video1.allLinks.length; i++) {
     
-    var filename = video1.allLnks[i].href;
-    video1.link_list[i] = filename.slice(0);
-
-        (function(index){
-        video1.allLnks[i].addEventListener("click", function(e){
-            
+    video1.linksList[i] = video1.allLinks[i].href;  
+    (function(index){
+        video1.allLinks[i].addEventListener("click", function(e){
             e.preventDefault();  
-            for (var i=0; i<video1.allLnks.length; i++) {
-                video1.allLnks[i].classList.remove("currentvid");
+            for (var i=0; i<video1.allLinks.length; i++) {
+                video1.allLinks[i].classList.remove("currentVideo");
             }
             video1.playVideo(index);
-           
-        });    
+           });    
     })(i);
 }
