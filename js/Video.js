@@ -104,7 +104,6 @@ Video.prototype.scrollings = function(e)
 {
 	var lala = e.clientX;
     this.xpos.innerHTML = lala;
-   
 }
 
 var video1 = new Video();
