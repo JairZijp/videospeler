@@ -9,7 +9,7 @@ var Video = function()
     this.durationTime = document.getElementById('durationTime');
     this.restartButton = document.getElementById("restartButton");
     this.scroller = document.getElementById("scroller");
-   
+    this.scrollContainer = document.getElementById('scroll-container');
     this.xpos = document.getElementById("xpos");
     
     this.videoSource = this.video.getElementsByTagName('source')[0];
@@ -20,13 +20,14 @@ var Video = function()
    
 }
 
-Video.prototype.playVideo = function(index){
+Video.prototype.playVideo = function(index)
+{
     this.videoLinks.children[index].classList.add("currentVideo");
     this.videoSource.src = this.linksList[index] + ".mp4";
     this.currentVideo = index;
+    console.log(this.currentVideo);
     this.video.load();
     this.video.play();
-
 }
 
 Video.prototype.playPause = function()
@@ -89,6 +90,16 @@ Video.prototype.restart = function()
     this.video.currentTime = 0;
 }
 
+Video.prototype.nextVideo = function(){
+    this.allLinks[this.currentVideo].classList.remove("currentVideo");
+    if ((this.currentVideo + 1) >= this.allLinks.length) { 
+        nextVid = 0;
+    } else { 
+        nextVid = this.currentVideo+1; 
+    }
+    this.playVideo(nextVid);
+}
+
 Video.prototype.scrollings = function(e) 
 {
 	var lala = e.clientX;
@@ -98,15 +109,15 @@ Video.prototype.scrollings = function(e)
 
 var video1 = new Video();
 
-video1.playButton.addEventListener('click',function(){ video1.playPause()       });
-video1.video.addEventListener("timeupdate",function(){ video1.timeUpdate()      });
-video1.muteButton.addEventListener("click",function(){ video1.mute()            });
-video1.fullScreen.addEventListener("click",function(){ video1.fullScreenMode()  });
-video1.restartButton.addEventListener("click",function(){ video1.restart()      });
-video1.scroller.addEventListener("click", function(e) { video1.scrollings(e)     });
+video1.playButton.addEventListener('click',function(){ video1.playPause()               });
+video1.video.addEventListener("timeupdate",function(){ video1.timeUpdate()              });
+video1.muteButton.addEventListener("click",function(){ video1.mute()                    });
+video1.fullScreen.addEventListener("click",function(){ video1.fullScreenMode()          });
+video1.restartButton.addEventListener("click",function(){ video1.restart()              });
+video1.scrollContainer.addEventListener("click", function(e) { video1.scrollings(e)     });
+video1.video.addEventListener('ended', function () {   video1.nextVideo()               });
 
 for (var i=0; i<video1.allLinks.length; i++) {
-    
     video1.linksList[i] = video1.allLinks[i].href;  
     (function(index){
         video1.allLinks[i].addEventListener("click", function(e){
@@ -118,3 +129,4 @@ for (var i=0; i<video1.allLinks.length; i++) {
            });    
     })(i);
 }
+
