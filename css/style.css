@@ -24,7 +24,7 @@ button {
 
 #scroller { 
 	height: 20px;
-	
+
 	width: 20px;
 	border-radius: 50%;
 	background-color: blue;
@@ -39,4 +39,15 @@ button {
 .currentVideo {
 	border: 5px solid red;
 }
+.fullScreenMode {
+	width: 100% !important;
+	height: 100% !important;
+}
+.fullScreenMode video {
+	width: auto;
+	display: table; 
+	margin: 0 auto;
+	height: 85% !important;
+}
+
 

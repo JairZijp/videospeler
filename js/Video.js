@@ -77,11 +77,14 @@ Video.prototype.mute = function ()
 Video.prototype.fullScreenMode = function()
 {
     if(this.video.requestFullScreen) {
-        this.video.requestFullScreen();
+        document.getElementById('videoWrapper').classList.add("fullScreenMode");
+        document.getElementById('videoWrapper').requestFullScreen();
     } else if (this.video.webkitRequestFullScreen) {
-        this.video.webkitRequestFullScreen();
+        document.getElementById('videoWrapper').classList.add("fullScreenMode");
+        document.getElementById('videoWrapper').webkitRequestFullScreen();
     } else if (this.video.mozRequestFullScreen) {
-        this.video.mozRequestFullScreen();
+        document.getElementById('videoWrapper').classList.add("fullScreenMode");
+        document.getElementById('videoWrapper').mozRequestFullScreen();
     }
 }
 
@@ -102,8 +105,21 @@ Video.prototype.nextVideo = function(){
 
 Video.prototype.scrollings = function(e) 
 {
-	var lala = e.clientX;
-    this.xpos.innerHTML = lala;
+	/*var test = e.clientX;
+    this.xpos.innerHTML = test;
+    console.log(this.scrollContainer.offsetWidth);
+
+    this.video.currentTime = test - (this.scrollContainer.offsetWidth * this.scrollContainer.offsetWidth / 100);
+
+    console.log(this.video.currentTime);*/
+
+    var mouseX = e.clientX - this.scroller.offsetLeft;
+    var calcX = mouseX / this.scrollContainer.offsetWidth * 100;
+
+    var timeToSet = calcX / 100 * this.video.duration; 
+    console.log(timeToSet);
+    this.video.currentTime = timeToSet;
+    
 }
 
 var video1 = new Video();

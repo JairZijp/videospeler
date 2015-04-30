@@ -7,23 +7,25 @@
 <body>
 
 <div class="videoBox">
-    <video id="video1" muted class="video" width="550" height="300" autoplay>
-        <source src="video/1.mp4">
-    
-    </video>
+    <div id="videoWrapper">
+        <video id="video1" muted class="video" width="550" height="300" autoplay>
+            <source src="video/1.mp4">
+        
+        </video>
 
-    <div class="controlBox">
-        <button id="restartButton"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></button>
-        <button id="playPauseToggle"><span class="glyphicon glyphicon-pause" aria-hidden="true"></span></button>
-        <div id="scroll-container">
-            <div id="scroller">
-                
+        <div class="controlBox">
+            <button id="restartButton"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></button>
+            <button id="playPauseToggle"><span class="glyphicon glyphicon-pause" aria-hidden="true"></span></button>
+            <div id="scroll-container">
+                <div id="scroller">
+                    
+                </div>
             </div>
+            <button id="mute"><span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span></button>
+            <button id="fullscreen"><span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></button>
+            <span id="currentTime"></span> |
+            <span id="durationTime"></span>
         </div>
-        <button id="mute"><span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span></button>
-        <button id="fullscreen"><span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></button>
-        <span id="currentTime"></span> |
-        <span id="durationTime"></span>
     </div>
 
     <section>
