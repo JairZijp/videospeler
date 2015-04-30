@@ -11,7 +11,8 @@ var Video = function()
     this.restartButton = document.getElementById("restartButton");
     this.nextButton = document.getElementById("next");
     this.previousButton = document.getElementById("previous");
-    this.scroller = document.getElementById("line");
+    this.scrolLine = document.getElementById("line");
+    this.scroller = document.getElementById("scroller");
     this.scrollContainer = document.getElementById('scroll-container');
     
     
@@ -23,12 +24,11 @@ var Video = function()
    
 }
 
-Video.prototype.playVideo = function(index)
+Video.prototype.playVideo = function(vidNumber)
 {
-    this.allLinks[index].classList.add("currentVideo");
-    this.videoSource.src = this.linksList[index] + ".mp4";
-    this.currentVideo = index;
-    console.log(this.currentVideo);
+    this.allLinks[vidNumber].classList.add("currentVideo");
+    this.videoSource.src = this.linksList[vidNumber] + ".mp4";
+    this.currentVideo = vidNumber;
     this.video.load();
     this.video.play();
 }
@@ -46,7 +46,7 @@ Video.prototype.playPause = function()
 
 Video.prototype.timeUpdate = function(currentMinutes, currentSeconds, durationMinutes, durationSeconds)
 {
-    this.scroller.style.width = this.video.currentTime * (100 / this.video.duration - 0.4) + '%';
+    this.scrolLine.style.width = this.video.currentTime * (100 / this.video.duration) + '%';
     currentMinutes = Math.floor(this.video.currentTime / 60);
     currentSeconds = Math.floor(this.video.currentTime - currentMinutes * 60);
     durationMinutes = Math.floor(this.video.duration / 60);
@@ -75,15 +75,10 @@ Video.prototype.mute = function ()
 Video.prototype.fullScreenMode = function()
 {
     if(this.video.requestFullScreen ) {
-        
         this.video.requestFullScreen();
-    
     } else if (this.video.webkitRequestFullScreen) {
-        
         this.video.webkitRequestFullScreen();
-    
     } else if (this.video.mozRequestFullScreen) {
-        
         this.video.mozRequestFullScreen();
     }
 }
@@ -93,7 +88,8 @@ Video.prototype.restart = function()
     this.video.currentTime = 0;
 }
 
-Video.prototype.nextVideo = function(){
+Video.prototype.nextVideo = function()
+{
     this.allLinks[this.currentVideo].classList.remove("currentVideo");
     if ((this.currentVideo + 1) >= this.allLinks.length) { 
         nextVid = 0;
@@ -103,7 +99,8 @@ Video.prototype.nextVideo = function(){
     this.playVideo(nextVid);
 }
 
-Video.prototype.previousVideo = function(){
+Video.prototype.previousVideo = function()
+{
     this.allLinks[this.currentVideo].classList.remove("currentVideo");
     if ((this.currentVideo) <= 0) { 
         previousVid = this.allLinks.length - 1;
@@ -116,16 +113,19 @@ Video.prototype.previousVideo = function(){
 
 Video.prototype.changeTime = function(e) 
 {
-	var mouseX = e.clientX - this.scroller.offsetLeft;
+	var mouseX = e.clientX - this.scrolLine.offsetLeft;
     var calcX = mouseX / this.scrollContainer.offsetWidth * 100;
-    var timeToSet = calcX / 100 * this.video.duration; 
-    console.log(timeToSet);
-    this.video.currentTime = timeToSet;
-    this.scroller.style.width =  this.video.currentTime/this.video.duration*100 + '%';
-
-
+    this.video.currentTime = calcX / 100 * this.video.duration; 
+    this.scrolLine.style.width =  this.video.currentTime/this.video.duration*100 + '%';
 }
 
+Video.prototype.dragAndDrop = function(e)
+{
+    document.onmousemove = function() {
+        console.log('move');
+        return false;
+    }
+}
 
 var video1 = new Video();
 
@@ -134,10 +134,18 @@ video1.video.addEventListener("timeupdate",function(){          video1.timeUpdat
 video1.muteButton.addEventListener("click",function(){          video1.mute()               });
 video1.fullScreen.addEventListener("click",function(){          video1.fullScreenMode()     });
 video1.restartButton.addEventListener("click",function(){       video1.restart()            });
-video1.scrollContainer.addEventListener("click", function(e) {  video1.changeTime(e)  });
+video1.scrollContainer.addEventListener("click", function(e) {  video1.changeTime(e)        });
 video1.video.addEventListener('ended', function () {            video1.nextVideo()          });
 video1.nextButton.addEventListener('click', function (){        video1.nextVideo()          });
 video1.previousButton.addEventListener("click",function(){      video1.previousVideo()      });
+
+video1.scroller.onmousedown = function () {
+    console.log('mousedown');
+    video1.dragAndDrop();
+}
+video1.scroller.onmouseup = function() {
+    console.log('mouseup');
+}
 for (var i=0; i<video1.allLinks.length; i++) {
     video1.linksList[i] = video1.allLinks[i].href;  
     (function(index){

@@ -8,7 +8,7 @@ video::-webkit-media-controls {
 video {
     background-color: white;
     margin-top: 25px;
-    margin-left: 25px;
+    margin-left: 10px;
 }
 .videoBox {
     background-color: #121314;
@@ -21,6 +21,7 @@ video {
     float: left;
     overflow: hidden;
     color: white;
+    margin-left: 25px;
 }
 .controlBox {
     padding: 10px;
@@ -39,11 +40,11 @@ button {
     margin-top: 5px;
     color: #88898C;
     background-color: transparent;
+
 }
 .pause {
     height: 60px;
     width: 60px;
-    left: 50%;
     border: 3px solid #88898C;
 }
 .icons:hover {
@@ -55,14 +56,21 @@ button {
 }
 #iconDiv {
     text-align: center;
+
+}
+#durationTime {
+	float: right;
 }
 /* scroller */
 
 #scroll-container {
-    height: 25px;
-    margin-top: 5px;
-    overflow: hidden;
+    height: auto;
+    
     float: none;
+    background-color: white;
+    height: 10px;
+    
+	width: 530px;
 }
 #scroller {
     height: 15px;
@@ -73,11 +81,12 @@ button {
     margin-top: -3px;
     margin-left: 15px;
     float: right;
+
 }
 #line {
     width: 100%;
     height: 10px;
-    margin-top: 10px;
+    
     background-color: #3594B7;
     border-radius: 0 5px 5px 0;
 }
