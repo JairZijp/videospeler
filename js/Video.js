@@ -1,6 +1,7 @@
 var Video = function()
 {
     this.video = document.getElementsByTagName('video')[0];
+    this.videoWrapper = document.getElementById('videoWrapper');
     this.playButton = document.getElementById("playPauseToggle");
     this.timeLine = document.getElementById("timeLine");
     this.muteButton = document.getElementById('mute');
@@ -8,21 +9,23 @@ var Video = function()
     this.currentTime = document.getElementById('currentTime');
     this.durationTime = document.getElementById('durationTime');
     this.restartButton = document.getElementById("restartButton");
+    this.nextButton = document.getElementById("next");
+    this.previousButton = document.getElementById("previous");
     this.scroller = document.getElementById("scroller");
     this.scrollContainer = document.getElementById('scroll-container');
-    this.xpos = document.getElementById("xpos");
+    
     
     this.videoSource = this.video.getElementsByTagName('source')[0];
     this.videoLinks = document.getElementsByTagName("section")[0];
     this.linksList =[];
     this.currentVideo = 0;
-    this.allLinks = this.videoLinks.children;
+    this.allLinks = document.getElementsByClassName('videoLink');
    
 }
 
 Video.prototype.playVideo = function(index)
 {
-    this.videoLinks.children[index].classList.add("currentVideo");
+    this.allLinks[index].classList.add("currentVideo");
     this.videoSource.src = this.linksList[index] + ".mp4";
     this.currentVideo = index;
     console.log(this.currentVideo);
@@ -34,16 +37,11 @@ Video.prototype.playPause = function()
 {
     if(this.video.paused){
         this.video.play();
-        this.playButton.innerHTML = '<span class="glyphicon glyphicon-pause" aria-hidden="true"></span>';
+        this.playButton.innerHTML = '<i class="fa fa-pause fa-2x"></i>';
     } else {
         this.video.pause();
-        this.playButton.innerHTML = '<span class="glyphicon glyphicon-play" aria-hidden="true"></span>';
+        this.playButton.innerHTML = '<i class="fa fa-play fa-2x"></i>';
     }
-}
-
-Video.prototype.dragTime = function()
-{
-    
 }
 
 Video.prototype.timeUpdate = function(currentMinutes, currentSeconds, durationMinutes, durationSeconds)
@@ -67,24 +65,26 @@ Video.prototype.mute = function ()
 {
     if(this.video.muted){
         this.video.muted = false;
-        this.muteButton.innerHTML = '<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>';
+        this.muteButton.innerHTML = '<i class="fa fa-volume-up fa-2x"></i>';
     } else {
         this.video.muted = true;
-        this.muteButton.innerHTML = '<span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span>';
+        this.muteButton.innerHTML = '<i class="fa fa-volume-off fa-2x"></i>';
     }
 }
 
 Video.prototype.fullScreenMode = function()
 {
-    if(this.video.requestFullScreen) {
-        document.getElementById('videoWrapper').classList.add("fullScreenMode");
-        document.getElementById('videoWrapper').requestFullScreen();
+    if(this.video.requestFullScreen ) {
+        
+        this.video.requestFullScreen();
+    
     } else if (this.video.webkitRequestFullScreen) {
-        document.getElementById('videoWrapper').classList.add("fullScreenMode");
-        document.getElementById('videoWrapper').webkitRequestFullScreen();
+        
+        this.video.webkitRequestFullScreen();
+    
     } else if (this.video.mozRequestFullScreen) {
-        document.getElementById('videoWrapper').classList.add("fullScreenMode");
-        document.getElementById('videoWrapper').mozRequestFullScreen();
+        
+        this.video.mozRequestFullScreen();
     }
 }
 
@@ -98,40 +98,49 @@ Video.prototype.nextVideo = function(){
     if ((this.currentVideo + 1) >= this.allLinks.length) { 
         nextVid = 0;
     } else { 
-        nextVid = this.currentVideo+1; 
+        nextVid = this.currentVideo + 1; 
     }
+
     this.playVideo(nextVid);
+}
+
+Video.prototype.previousVideo = function(){
+    this.allLinks[this.currentVideo].classList.remove("currentVideo");
+    if ((this.currentVideo) <= 0) { 
+        previousVid = this.allLinks.length - 1;
+    } else { 
+        previousVid = this.currentVideo - 1; 
+    }
+    console.log(previousVid);
+    this.playVideo(previousVid);
 }
 
 Video.prototype.scrollings = function(e) 
 {
-	/*var test = e.clientX;
-    this.xpos.innerHTML = test;
-    console.log(this.scrollContainer.offsetWidth);
-
-    this.video.currentTime = test - (this.scrollContainer.offsetWidth * this.scrollContainer.offsetWidth / 100);
-
-    console.log(this.video.currentTime);*/
-
+	
     var mouseX = e.clientX - this.scroller.offsetLeft;
     var calcX = mouseX / this.scrollContainer.offsetWidth * 100;
 
     var timeToSet = calcX / 100 * this.video.duration; 
     console.log(timeToSet);
     this.video.currentTime = timeToSet;
+
+    this.scroller.style.marginLeft =  this.video.currentTime/this.video.duration*100 + '%';
     
 }
 
+
 var video1 = new Video();
 
-video1.playButton.addEventListener('click',function(){ video1.playPause()               });
-video1.video.addEventListener("timeupdate",function(){ video1.timeUpdate()              });
-video1.muteButton.addEventListener("click",function(){ video1.mute()                    });
-video1.fullScreen.addEventListener("click",function(){ video1.fullScreenMode()          });
-video1.restartButton.addEventListener("click",function(){ video1.restart()              });
-video1.scrollContainer.addEventListener("click", function(e) { video1.scrollings(e)     });
-video1.video.addEventListener('ended', function () {   video1.nextVideo()               });
-
+video1.playButton.addEventListener('click',function(){          video1.playPause()          });
+video1.video.addEventListener("timeupdate",function(){          video1.timeUpdate()         });
+video1.muteButton.addEventListener("click",function(){          video1.mute()               });
+video1.fullScreen.addEventListener("click",function(){          video1.fullScreenMode()     });
+video1.restartButton.addEventListener("click",function(){       video1.restart()            });
+video1.scrollContainer.addEventListener("click", function(e) {  video1.scrollings(e)        });
+video1.video.addEventListener('ended', function () {            video1.nextVideo()          });
+video1.nextButton.addEventListener('click', function (){        video1.nextVideo()          });
+video1.previousButton.addEventListener("click",function(){      video1.previousVideo()      });
 for (var i=0; i<video1.allLinks.length; i++) {
     video1.linksList[i] = video1.allLinks[i].href;  
     (function(index){
@@ -144,4 +153,5 @@ for (var i=0; i<video1.allLinks.length; i++) {
            });    
     })(i);
 }
+
 

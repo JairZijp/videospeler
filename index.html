@@ -2,7 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -14,31 +14,42 @@
         </video>
 
         <div class="controlBox">
-            <button id="restartButton"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></button>
-            <button id="playPauseToggle"><span class="glyphicon glyphicon-pause" aria-hidden="true"></span></button>
+            
+           
             <div id="scroll-container">
+                <div id="line"></div>
                 <div id="scroller">
                     
                 </div>
             </div>
-            <button id="mute"><span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span></button>
-            <button id="fullscreen"><span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></button>
             <span id="currentTime"></span> |
             <span id="durationTime"></span>
+            <div id="iconDiv">
+                <button class="icons " id="previous"><i class="fa fa-step-backward fa-2x"></i></button>
+                <button class="icons pause" id="playPauseToggle"><i class="fa fa-pause fa-2x"></i></button>
+                <button class="icons " id="next"><i class="fa fa-step-forward fa-2x"></i></button>
+                <br>
+                <button class="icons" id="restartButton"><i class="fa fa-repeat fa-2x"></i></button>
+                <button class="rightIcon icons" id="mute"><i class="fa fa-volume-off fa-2x"></i></button>
+                <button class="rightIcon icons" id="fullscreen"><i class="fa fa-desktop fa-2x"></i></button>
+            </div>
         </div>
     </div>
-
-    <section>
-        <a href="video/1" class="videoLink currentVideo">
-            Video 1
-        </a>
     
-        <a href="video/2" class="videoLink">
-            Video 2
-        </a>
-        <a href="video/3" class="videoLink">
-            Video 3
-        </a>
+    <section>
+        <ul>
+            <li>
+                <a href="video/1" class="videoLink currentVideo"> Video 1</a>
+            </li>
+            
+            <li>
+                <a href="video/2" class="videoLink"> Video 2</a>
+            </li>
+            
+            <li>
+                <a href="video/3" class="videoLink"> Video 3</a>
+            </li>
+
     </section>
 
     <span id="xpos"></span>
