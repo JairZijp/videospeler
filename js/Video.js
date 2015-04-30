@@ -100,7 +100,6 @@ Video.prototype.nextVideo = function(){
     } else { 
         nextVid = this.currentVideo + 1; 
     }
-
     this.playVideo(nextVid);
 }
 
@@ -115,18 +114,16 @@ Video.prototype.previousVideo = function(){
     this.playVideo(previousVid);
 }
 
-Video.prototype.scrollings = function(e) 
+Video.prototype.changeTime = function() 
 {
-	
-    var mouseX = e.clientX - this.scroller.offsetLeft;
+	var mouseX = e.clientX - this.scroller.offsetLeft;
     var calcX = mouseX / this.scrollContainer.offsetWidth * 100;
-
     var timeToSet = calcX / 100 * this.video.duration; 
     console.log(timeToSet);
     this.video.currentTime = timeToSet;
-
     this.scroller.style.marginLeft =  this.video.currentTime/this.video.duration*100 + '%';
-    
+
+
 }
 
 
@@ -137,7 +134,7 @@ video1.video.addEventListener("timeupdate",function(){          video1.timeUpdat
 video1.muteButton.addEventListener("click",function(){          video1.mute()               });
 video1.fullScreen.addEventListener("click",function(){          video1.fullScreenMode()     });
 video1.restartButton.addEventListener("click",function(){       video1.restart()            });
-video1.scrollContainer.addEventListener("click", function(e) {  video1.scrollings(e)        });
+video1.scrollContainer.addEventListener("click", function(e) {  video1.changeTime(e.pageX)  });
 video1.video.addEventListener('ended', function () {            video1.nextVideo()          });
 video1.nextButton.addEventListener('click', function (){        video1.nextVideo()          });
 video1.previousButton.addEventListener("click",function(){      video1.previousVideo()      });

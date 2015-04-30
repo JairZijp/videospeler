@@ -1,22 +1,20 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto);
 * {
-    
     font-family: 'Roboto', sans-serif;
 }
 video::-webkit-media-controls {
-  display:none !important;
+    display: none !important;
 }
 video {
-	background-color: white;
-	margin-top: 25px;
-	margin-left: 25px;
+    background-color: white;
+    margin-top: 25px;
+    margin-left: 25px;
 }
 .videoBox {
-	background-color: #121314;
-	width: 825px;
+    background-color: #121314;
+    width: 825px;
     margin: 0px auto;
     overflow: hidden;
-    
 }
 #videoWrapper {
     width: 550px;
@@ -24,50 +22,47 @@ video {
     overflow: hidden;
     color: white;
 }
-
 .controlBox {
-   padding: 10px;
-
+    padding: 10px;
 }
 /* Icons */
+
 button {
     cursor: pointer;
     background-color: white;
-	width: 40px;
-	height: 40px;
-	border-radius: 200%;
+    width: 40px;
+    height: 40px;
+    border-radius: 200%;
     border: 0;
 }
 .icons {
-	margin-top: 5px;
-	color: #88898C;
-	background-color: transparent;
+    margin-top: 5px;
+    color: #88898C;
+    background-color: transparent;
 }
-
 .pause {
-	height: 60px;
-	width: 60px;
-	left: 50%;
-	border: 3px solid #88898C;
-
+    height: 60px;
+    width: 60px;
+    left: 50%;
+    border: 3px solid #88898C;
 }
 .icons:hover {
-	color: #5FC2F1;
+    color: #5FC2F1;
 }
 .pause:hover {
-	border: 3px solid #5FC2F1;
-	color: white;
+    border: 3px solid #5FC2F1;
+    color: white;
 }
 #iconDiv {
-	text-align: center;
+    text-align: center;
 }
 /* scroller */
+
 #scroll-container {
     height: 25px;
     margin-top: 5px;
     overflow: hidden;
     float: none;
-    
 }
 #scroller {
     height: 15px;
@@ -76,51 +71,43 @@ button {
     background-color: #5FC2F1;
     border: 1px solid #0C5C7A;
     margin-top: -13px;
-
 }
-
 #line {
-	width: 100%;
-	height: 10px;
-	margin-top: 10px;
-	background-color: #3594B7;
-	
+    width: 100%;
+    height: 10px;
+    margin-top: 10px;
+    background-color: #3594B7;
 }
-
 /* Video items */
 
 ul {
-	height: auto;
-	overflow: scroll;
-	overflow-x: hidden;
+    height: auto;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 li {
     list-style: none;
     height: 60px;
     width: 240px;
     float: right;
-    
     border-left: 1px solid #222326;
 }
 li:hover {
-	background-color: #1C1C1F;
+    background-color: #1C1C1F;
 }
 a:hover {
-	text-decoration: none;
+    text-decoration: none;
 }
 section {
-	margin-top: 25px;
-
+    margin-top: 25px;
 }
 section a {
-   display: block;
-   height: 100%;
-   text-decoration: none;
-   color: white;
-   text-align: center;
+    display: block;
+    height: 100%;
+    text-decoration: none;
+    color: white;
+    text-align: center;
 }
 .currentVideo {
-   	background-color: #3594B7;
-    
+    background-color: #3594B7;
 }
-
