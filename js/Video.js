@@ -11,7 +11,7 @@ var Video = function()
     this.restartButton = document.getElementById("restartButton");
     this.nextButton = document.getElementById("next");
     this.previousButton = document.getElementById("previous");
-    this.scroller = document.getElementById("scroller");
+    this.scroller = document.getElementById("line");
     this.scrollContainer = document.getElementById('scroll-container');
     
     
@@ -46,7 +46,7 @@ Video.prototype.playPause = function()
 
 Video.prototype.timeUpdate = function(currentMinutes, currentSeconds, durationMinutes, durationSeconds)
 {
-    this.scroller.style.marginLeft = this.video.currentTime * (100 / this.video.duration - 0.4) + '%';
+    this.scroller.style.width = this.video.currentTime * (100 / this.video.duration - 0.4) + '%';
     currentMinutes = Math.floor(this.video.currentTime / 60);
     currentSeconds = Math.floor(this.video.currentTime - currentMinutes * 60);
     durationMinutes = Math.floor(this.video.duration / 60);
@@ -114,14 +114,14 @@ Video.prototype.previousVideo = function(){
     this.playVideo(previousVid);
 }
 
-Video.prototype.changeTime = function() 
+Video.prototype.changeTime = function(e) 
 {
 	var mouseX = e.clientX - this.scroller.offsetLeft;
     var calcX = mouseX / this.scrollContainer.offsetWidth * 100;
     var timeToSet = calcX / 100 * this.video.duration; 
     console.log(timeToSet);
     this.video.currentTime = timeToSet;
-    this.scroller.style.marginLeft =  this.video.currentTime/this.video.duration*100 + '%';
+    this.scroller.style.width =  this.video.currentTime/this.video.duration*100 + '%';
 
 
 }
@@ -134,7 +134,7 @@ video1.video.addEventListener("timeupdate",function(){          video1.timeUpdat
 video1.muteButton.addEventListener("click",function(){          video1.mute()               });
 video1.fullScreen.addEventListener("click",function(){          video1.fullScreenMode()     });
 video1.restartButton.addEventListener("click",function(){       video1.restart()            });
-video1.scrollContainer.addEventListener("click", function(e) {  video1.changeTime(e.pageX)  });
+video1.scrollContainer.addEventListener("click", function(e) {  video1.changeTime(e)  });
 video1.video.addEventListener('ended', function () {            video1.nextVideo()          });
 video1.nextButton.addEventListener('click', function (){        video1.nextVideo()          });
 video1.previousButton.addEventListener("click",function(){      video1.previousVideo()      });
