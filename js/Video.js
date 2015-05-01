@@ -127,7 +127,7 @@ Video.prototype.dragAndDrop = function(e)
     function drag(e){
         var mouseX = e.clientX - self.scrolLine.offsetLeft;
         var calcX = (mouseX / self.scrollContainer.offsetWidth) * self.video.duration;
-        self.video.currentTime = test;
+        self.video.currentTime = calcX;
     }
 
     this.scrollContainer.addEventListener('mouseup', function(){
