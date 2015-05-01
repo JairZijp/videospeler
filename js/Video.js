@@ -116,15 +116,23 @@ Video.prototype.changeTime = function(e)
 	var mouseX = e.clientX - this.scrolLine.offsetLeft;
     var calcX = mouseX / this.scrollContainer.offsetWidth * 100;
     this.video.currentTime = calcX / 100 * this.video.duration; 
-    this.scrolLine.style.width =  this.video.currentTime/this.video.duration*100 + '%';
+    this.scrolLine.style.width =  this.video.currentTime * (100 / this.video.duration) + '%'; 
 }
 
 Video.prototype.dragAndDrop = function(e)
 {
-    document.onmousemove = function() {
-        console.log('move');
-        return false;
+    var self = this;
+    this.scrollContainer.addEventListener('mousemove', drag, false);
+
+    function drag(e){
+        var mouseX = e.clientX - self.scrolLine.offsetLeft;
+        var calcX = (mouseX / self.scrollContainer.offsetWidth) * self.video.duration;
+        self.video.currentTime = test;
     }
+
+    this.scrollContainer.addEventListener('mouseup', function(){
+        self.scrollContainer.removeEventListener('mousemove', drag, false);
+    });
 }
 
 var video1 = new Video();
@@ -138,14 +146,8 @@ video1.scrollContainer.addEventListener("click", function(e) {  video1.changeTim
 video1.video.addEventListener('ended', function () {            video1.nextVideo()          });
 video1.nextButton.addEventListener('click', function (){        video1.nextVideo()          });
 video1.previousButton.addEventListener("click",function(){      video1.previousVideo()      });
+video1.scrolLine.addEventListener('mousedown', function(){video1.dragAndDrop()        });
 
-video1.scroller.onmousedown = function () {
-    console.log('mousedown');
-    video1.dragAndDrop();
-}
-video1.scroller.onmouseup = function() {
-    console.log('mouseup');
-}
 for (var i=0; i<video1.allLinks.length; i++) {
     video1.linksList[i] = video1.allLinks[i].href;  
     (function(index){

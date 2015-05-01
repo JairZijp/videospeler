@@ -65,12 +65,10 @@ button {
 
 #scroll-container {
     height: auto;
-    
     float: none;
     background-color: white;
     height: 10px;
-    
-	width: 530px;
+   	width: 540px;
 }
 #scroller {
     height: 15px;
