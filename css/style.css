@@ -1,4 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto);
+@import url(http://cloud.rickgroen.com/fancyscroller/fancyscroller.css);
+
 * {
     font-family: 'Roboto', sans-serif;
 }
@@ -17,11 +19,12 @@ video {
     overflow: hidden;
 }
 #videoWrapper {
-    width: 550px;
+    width: 400px;
     float: left;
     overflow: hidden;
     color: white;
     margin-left: 25px;
+    margin-right: 25px;
 }
 .controlBox {
     padding: 10px;
@@ -65,10 +68,12 @@ button {
 
 #scroll-container {
     height: auto;
+    
     float: none;
     background-color: white;
     height: 10px;
-   	width: 540px;
+    
+	width: 400px;
 }
 #scroller {
     height: 15px;
@@ -94,11 +99,13 @@ ul {
     height: auto;
     overflow: scroll;
     overflow-x: hidden;
+    padding: 0px;
 }
+
 li {
     list-style: none;
     height: 60px;
-    width: 240px;
+    width: 400px;
     float: right;
     border-left: 1px solid #222326;
 }
@@ -108,9 +115,11 @@ li:hover {
 a:hover {
     text-decoration: none;
 }
+
 section {
     margin-top: 25px;
 }
+
 section a {
     display: block;
     height: 100%;
@@ -118,6 +127,12 @@ section a {
     color: white;
     text-align: center;
 }
+
 .currentVideo {
     background-color: #3594B7;
+}
+
+#video1 {
+    width: 400px;
+    margin-left: 
 }
